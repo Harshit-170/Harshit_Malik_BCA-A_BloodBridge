@@ -1,0 +1,28 @@
+.volunteer-box {
+    max-width: 800px;
+    margin: 15px auto;
+    background: #f9f9f9;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  summary {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .volunteer-box p {
+    margin-top: 10px;
+  }
+
+<!-- Section: Volunteer -->
+    <section class="volunteer-section fade-in">
+      <h2>Join Us as a Volunteer</h2>
+      <div class="image-centered">
+        <img src="volunteer_team.jpg" alt="Volunteer Team" class="section-image">
+      </div>
+      <div class="volunteer-box">
+        <p>Be a hero behind the scenes. Help organize events, manage donors, and spread awareness.</p>
+        <button class="cta-button">Become a Volunteer</button>
+      </div>
+    </section>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blood Type Compatibility</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .chart {
+      position: relative;
+      width: 700px;
+      margin: auto;
+    }
+
+    .bags, .drops {
+      display: flex;
+      justify-content: space-around;
+      position: relative;
+    }
+
+    .bags {
+      margin-bottom: 60px;
+    }
+
+    .blood-bag {
+      width: 60px;
+      height: 90px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      position: relative;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .blood-fill {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 50%;
+      background-color: red;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .blood-type-label {
+      position: absolute;
+      top: 35%;
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      color: white;
+      font-size: 18px;
+    }
+
+    .drop {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid #ccc;
+      text-align: center;
+      line-height: 40px;
+      font-weight: bold;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 250px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .path {
+      stroke: red;
+      stroke-width: 3;
+      fill: none;
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      animation: none;
+    }
+
+    .path.active {
+      animation: draw 2s forwards;
+    }
+
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .caption {
+      margin-top: 30px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Click on a blood type below to learn more.</h2>
+
+  <div class="chart">
+    <!-- Blood Bags (Donors) -->
+    <div class="bags">
+      <div class="blood-bag" onclick="activate('O')">
+        <div class="blood-fill"></div>
+        <div class="blood-type-label">O</div>
+      </div>
+      <div class="blood-bag" onclick="activate('A')">
+        <div class="blood-fill"></div>
+        <div class="blood-type-label">A</div>
+      </div>
+      <div class="blood-bag" onclick="activate('B')">
+        <div class="blood-fill"></div>
+        <div class="blood-type-label">B</div>
+      </div>
+      <div class="blood-bag" onclick="activate('AB')">
+        <div class="blood-fill"></div>
+        <div class="blood-type-label">AB</div>
+      </div>
+    </div>
+
+    <!-- Blood Drops (Recipients) -->
+    <div class="drops">
+      <div class="drop">O</div>
+      <div class="drop">A</div>
+      <div class="drop">B</div>
+      <div class="drop">AB</div>
+    </div>
+
+    <!-- SVG Paths (Blood Flow Lines) -->
+    <svg>
+      <!-- O -->
+      <path id="O-O" class="path" d="M 80 90 C 80 140, 80 180, 80 210" />
+      <path id="O-A" class="path" d="M 80 90 C 150 140, 150 180, 180 210" />
+      <path id="O-B" class="path" d="M 80 90 C 240 140, 240 180, 280 210" />
+      <path id="O-AB" class="path" d="M 80 90 C 330 140, 330 180, 380 210" />
+
+      <!-- A -->
+      <path id="A-A" class="path" d="M 180 90 C 180 140, 180 180, 180 210" />
+      <path id="A-AB" class="path" d="M 180 90 C 280 140, 280 180, 380 210" />
+
+      <!-- B -->
+      <path id="B-B" class="path" d="M 280 90 C 280 140, 280 180, 280 210" />
+      <path id="B-AB" class="path" d="M 280 90 C 330 140, 330 180, 380 210" />
+
+      <!-- AB -->
+      <path id="AB-AB" class="path" d="M 380 90 C 380 140, 380 180, 380 210" />
+    </svg>
+  </div>
+
+  <div class="caption" id="infoText">
+    Group A can donate red blood cells to A’s and AB’s.
+  </div>
+
+  <script>
+    const compatibility = {
+      O: ['O', 'A', 'B', 'AB'],
+      A: ['A', 'AB'],
+      B: ['B', 'AB'],
+      AB: ['AB']
+    };
+
+    const messages = {
+      O: "Group O can donate red blood cells to all blood types.",
+      A: "Group A can donate red blood cells to A’s and AB’s.",
+      B: "Group B can donate red blood cells to B’s and AB’s.",
+      AB: "Group AB can donate red blood cells only to AB’s."
+    };
+
+    function activate(donor) {
+      document.querySelectorAll('.path').forEach(p => p.classList.remove('active'));
+      compatibility[donor].forEach(recipient => {
+        const path = document.getElementById(`${donor}-${recipient}`);
+        if (path) path.classList.add('active');
+      });
+
+      document.getElementById("infoText").textContent = messages[donor];
+    }
+  </script>
+
+</body>
+</html>

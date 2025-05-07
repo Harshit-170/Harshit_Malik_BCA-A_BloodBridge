@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOOD BRIDGE</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+
+        header {
+            position: relative;
+            padding: 20px 60px;
+            background-color: white;
+            box-shadow: 0px 4px 10px rgba(247, 0, 0, 0.1);
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            height: 100%;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 10px rgba(213, 0, 0, 0.8));
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            color: #d50000;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .nav {
+            position: absolute;
+            bottom: -10px;
+            left: 430px;
+            display: flex;
+            gap: 85px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav a:hover {
+            color: #d50000;
+        }
+
+        .buttons {
+            position: absolute;
+            top: 20px;
+            right: 60px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .register {
+            background-color: #d50000;
+            box-shadow: 0 3px 6px rgba(213, 0, 0, 0.3);
+            color: white;
+        }
+
+        .donate {
+            background-color: #02cd32;
+            box-shadow: 0 3px 6px rgba(0, 128, 0, 0.2);
+            color: white;
+        }
+
+        .btn:hover {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+        }
+
+        .homebg {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            min-height: 400px;
+        }
+
+        .homebg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(3px);
+            z-index: 1;
+        }
+
+        .home-img-1 {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0.85;
+            z-index: 0;
+        }
+
+        .home-content {
+            position: absolute;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            text-shadow:
+                0 0 4px #ff0000,
+                0 0 8px #ff0000,
+                0 0 12px #ff0000;
+        }
+
+        .home-content h1 {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        .home-content h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .connect-btn {
+            background-color: #d50000;
+            color: white;
+            border: none;
+            padding: 16px 36px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 15px rgba(213, 0, 0, 0.5);
+            text-shadow:
+                0 0 5px #ff0000,
+                0 0 10px #ff0000,
+                0 0 15px #ff0000;
+            margin-top: 20px;
+        }
+
+        .connect-btn:hover {
+            background-color: #ff1a1a;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.7);
+            text-shadow:
+                0 0 10px #ffffff,
+                0 0 20px #ff4d4d,
+                0 0 30px #ff4d4d;
+        }
+
+        .about-us-section {
+            background-color: #ffffff;
+            padding: 60px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        .about-us-section .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-us-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #d90429;
+        }
+
+        .about-us-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .person-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 20px;
+        }
+
+        .person-gallery img {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 100%;
+            height: auto;
+        }
+
+        .faq-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #e0f0ff;
+    padding: 60px 80px;
+    gap: 40px;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  .faq-text {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .faq-text h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #1a3c61;
+    margin-bottom: 30px;
+  }
+
+  .faq-text details {
+    border-bottom: 1px solid #c9d8e6;
+    padding: 15px 0;
+    overflow: hidden;
+  }
+
+  .faq-text summary {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1a1a1a;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-text details[open] summary::after {
+    content: "-";
+    font-size: 22px;
+  }
+
+  .faq-text summary::after {
+    content: "+";
+    font-size: 22px;
+    transition: transform 0.3s ease;
+  }
+
+  .faq-text details[open] div {
+    animation: slideDown 0.3s ease forwards;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #444;
+  }
+
+  .faq-image {
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .faq-image img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .faq-button {
+    margin-top: 30px;
+  }
+
+  .faq-button a {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #ffffff;
+    color: #114b7c;
+    font-weight: 600;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .faq-button a:hover {
+    background-color: #dbefff;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+        .footer {
+            background-color: #8b0000;
+            color: #ffffff;
+            padding: 30px 60px 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-left h3 {
+            margin-bottom: 10px;
+            font-size: 40px;
+        }
+
+        .footer-left p {
+            margin: 0;
+            font-size: 27px;
+        }
+
+        .footer-center h4,
+        .footer-right h4 {
+            margin-bottom: 25px;
+            font-size: 23px;
+        }
+
+        .footer-center ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-center ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-center ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 17px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-center ul li a:hover {
+            color: #e07777;
+            transition: 500ms ease-in-out;
+        }
+
+        .footer-right form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .footer-right input[type="email"] {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 17px;
+            flex: 1 1 200px;
+        }
+
+        .footer-right button {
+            background-color: #d50000;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-right button:hover {
+            background-color: #b00000;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        @media (max-width: 900px) {
+            .buttons,
+            .nav {
+                position: static;
+                margin-top: 20px;
+            }
+
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                height: auto;
+            }
+
+            .home-content h1 {
+                font-size: 28px;
+            }
+
+            .home-content h2 {
+                font-size: 18px;
+            }
+
+            .connect-btn {
+                font-size: 20px;
+                padding: 12px 28px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-right form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="BBlogo.png" class="logo-img" alt="Blood Bridge Logo">
+                <div class="logo-text">
+                    <div class="logo">BLOOD BRIDGE</div>
+                    <div class="tagline">Connecting Lives Saving Future</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="Aware.html">Spread Awareness</a>
+                <a href="donationexp.html">Donation Explained</a>
+                <a href="aboutUs.html">About Us</a>
+                <a href="Contactus.html">Contact Us</a>
+            </nav>
+        </div>
+        <div class="buttons">
+            <a href="Signup.html" id="registerNow" class="btn register">Register Now</a>
+            <a href="#" id="donateNow" class="btn donate">Donate Money</a>
+        </div>
+    </header>
+
+    <div class="homebg">
+        <img class="home-img-1" src="homepage1.jpg" alt="homepage image">
+        <div class="home-content">
+            <h1>Welcome to Blood Bridge</h1>
+            <h2>Connecting Donors and Recipients</h2>
+            <button class="connect-btn">CONNECT PEOPLE</button>
+        </div>
+    </div>
+
+    <section class="about-us-section">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>At <strong>BloodBridge</strong>, we are driven by a single mission — to <i>save lives by connecting those in need of blood with generous donors in real time</i>.</p>
+            <p>In moments of urgency, every second counts. That's why we've built a platform that bridges the gap between blood seekers and donors, <strong>bypassing delays from hospitals or blood banks</strong>, ensuring help reaches where it's needed most — fast.</p>
+            <p>Founded with compassion and powered by technology, BloodBridge simplifies the process of blood donation and requests. Whether you’re a <em>donor looking to make a difference</em> or <em>someone in urgent need of blood</em>, our platform offers a seamless way to connect, communicate, and coordinate.</p>
+            <p>We believe in the power of <strong>community</strong>, <strong>humanity</strong>, and <strong>technology</strong> to save lives — one drop at a time.</p>
+        </div>
+    </section>
+
+    <div class="person-gallery">
+        <img src="person1.jpg" alt="Volunteer 1" width="300" height="400">
+        <img src="person2.jpeg" alt="Volunteer 2" width="300" height="400">
+    </div>
+
+    <!-- Section: FAQ -->
+<section class="faq-wrapper">
+    <div class="faq-text">
+      <h2>Frequently asked questions</h2>
+  
+      <details>
+        <summary>Who can donate blood on BloodBridge?</summary>
+        <div>
+          Anyone aged 18–65, in good health, and weighing at least 50 kg can register as a donor. Additional eligibility may apply based on medical history.
+        </div>
+      </details>
+      
+      <details>
+        <summary>Is donating blood through BloodBridge safe?</summary>
+        <div>
+          Yes. All donations are conducted through certified medical professionals following strict safety protocols. BloodBridge simply connects donors with recipients in real-time.
+        </div>
+      </details>
+      
+      <details>
+            <summary>Do I get paid for donating blood?</summary>
+            <div>
+              While you don't receive direct payment, BloodBridge rewards dedicated donors with gift vouchers, exclusive prizes, and achievement badges after certain milestones. It's our way of appreciating your life-saving contributions!
+            </div>          
+      </details>
+      
+      <details>
+        <summary>How often can I donate blood?</summary>
+        <div>
+          Men can donate every 3 months, and women every 4 months, provided they meet the health criteria at the time of donation.
+        </div>
+      </details>
+      
+      <details>
+        <summary>Can I request blood urgently on BloodBridge?</summary>
+        <div>
+          Yes. You can post an urgent blood request, and nearby compatible donors will be notified instantly via SMS and email.
+        </div>
+      </details>
+      
+      <details>
+        <summary>Is my personal data safe on BloodBridge?</summary>
+        <div>
+          Absolutely. We use end-to-end encryption and never share your data without consent. Privacy and security are our top priorities.
+        </div>
+      </details>
+  
+      <div class="faq-button">
+        <a href="#">Have more Questions? Contact Us</a>
+      </div>
+    </div>
+  
+    <div class="faq-image">
+      <img src="Faq.jpg" alt="FAQ Image">
+    </div>
+  </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <h3>Blood Bridge</h3>
+                <p>Connecting lives, saving futures.</p>
+            </div>
+            <div class="footer-center">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Aware.html">Spread Awareness</a></li>
+                    <li><a href="donationexp.html">Donation Explained</a></li>
+                    <li><a href="aboutUs.html">About Us</a></li>
+                    <li><a href="Contactus.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h4>Register for Updates</h4>
+                <form onsubmit="event.preventDefault(); window.location.href='register.php';">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Blood Bridge | Developed with Kindness amongst People</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const registerLink = document.getElementById("registerNow");
+            const donateLink = document.getElementById("donateNow");
+
+            function setupFadeRedirect(element, url) {
+                if (element) {
+                    element.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        document.body.classList.add("fade-out");
+                        setTimeout(() => {
+                            window.location.href = url;
+                        }, 800);
+                    });
+                }
+            }
+
+            setupFadeRedirect(registerLink, "login.html");
+            setupFadeRedirect(donateLink, "#");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Sign Up</title>
+    <style>
+        body {
+            background-image: url("login1_bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+
+        .container {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+            animation: slideIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .fade-out {
+            animation: fadeOut 0.8s ease-in-out forwards;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        input {
+            width: 95%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #ff0000;
+            box-shadow: 0px 0px 5px #ff0000;
+            outline: none;
+        }
+
+        label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 0 5px;
+            font-size: 16px;
+            color: #aaa;
+            transition: 0.3s ease-in-out;
+            pointer-events: none;
+        }
+
+        input:focus+label,
+        input:not(:placeholder-shown)+label {
+            top: 0;
+            left: 12px;
+            font-size: 12px;
+            color: #ff0000;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #cc0000;
+            transform: scale(1.05);
+        }
+
+        .forgot-password, .signup-link {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .forgot-password a, .signup-link a {
+            color: #ff0000;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+        }
+
+        .forgot-password a:hover, .signup-link a:hover {
+            color: #cc0000;
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+        }
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            if (form) {
+                form.addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    document.body.classList.add("fade-out");
+                    setTimeout(() => {
+                        window.location.href = "index.html";
+                    }, 800);
+                });
+            }
+
+            const links = document.querySelectorAll("a");
+            links.forEach(link => {
+                link.addEventListener("click", function (event) {
+                    if (this.getAttribute("href") !== "#") {
+                        event.preventDefault();
+                        document.body.classList.add("fade-out");
+                        setTimeout(() => {
+                            window.location.href = this.getAttribute("href");
+                        }, 800);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Welcome Back!</h2>
+        <form>
+            <div class="input-group">
+                <input type="text" id="Username" name="Username" required placeholder=" ">
+                <label for="Username"><b>Username</b></label>
+            </div>
+            <div class="input-group password-container">
+                <input type="password" id="Password" name="Password" required placeholder=" ">
+                <label for="Password"><b>Password</b></label>
+            </div>
+            <button type="submit"><b>Login</b></button>
+        </form>
+        
+        <div class="forgot-password">
+            <p><a href="#">Forgot Password?</a></p>
+        </div>
+        <div class="signup-link">
+            <p>Don't have an account? <a href="Signup.html">Take the First Step</a></p>
